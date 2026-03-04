@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="route">{{ ticket.routes }}</h2>
+<p><strong>Description:</strong> {{ ticket.description }}</p>
+<!-- <p><strong>Manufacturer:</strong> {{ ticket.manufacturer }}</p> -->
+<p><strong>Price:</strong> ${{ ticket.price }}</p>
+<p><strong>Durations:</strong> {{ ticket.durations }}</p>
+<p><strong>person:</strong> {{ ticket.person }}</p>
+
+<a href="{% url 'edit-bus' ticket.id %}" class="btn btn-success">Edit</a>
+<a href="{% url 'delete-bus' ticket.id %}" class="btn btn-danger">Delete</a>
+<a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+{% endblock %}

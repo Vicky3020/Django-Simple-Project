@@ -1,0 +1,45 @@
+body{
+    height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    background: rgb(237, 215, 215);
+}
+.online{
+    font-size: 3.5rem;
+    font-weight: 600;
+    font-style: oblique;
+    font-display: block;
+    font-variant: small-caps;
+    font-size-adjust: none;
+    
+}
+/* .table{
+    border: 2px solid red;
+    display: flex;
+    align-items: start;
+    justify-content: start;
+} */
+/* .btn{
+    display: flex; 
+    justify-content:
+    align-items: center;
+} */
+
+#searchForm :hover{
+    border: 2px solid rgb(7, 243, 255);
+}
+
+.book{
+    background: #ffffff;
+   /* font-size: medium; */
+   /* font-weight: 600; */
+}
+.para{
+    font-size: medium;
+    font-weight: 400;
+}
+.para :hover {
+    background: rgb(221, 154, 236);
+    /* transform: scale(75);
+    transform: translate(4); */
+}

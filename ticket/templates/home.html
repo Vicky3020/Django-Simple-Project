@@ -1,0 +1,115 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h2>Show Bus Roots</h2>
+  <a href="{% url 'add-place' %}" class="btn btn-success"> Add places</a>
+  <button id="ticketBtn" class="btn btn-outline-info">Book Ticket</button>
+</div>
+
+<!-- Dashboard stats -->
+<div class="row text-center mb-4">
+  <div class="col">
+    <div class="alert alert-warning">Starting Bus: {{ stats.total }}</div>
+  </div>
+  <div class="col">
+    <div class="alert alert-danger">Missing Bus: {{ stats.expired }}</div>
+  </div>
+  <!-- <div class="col"><div class="alert alert-info">Person: {{ stats.person }}</div></div> -->
+  <!-- <div class="col"><div class="alert alert-info">Ending Point: {{ stats.available }}</div></div> -->
+</div>
+<!-- image  -->
+<img
+  src="{% static 'royal.jpg' %}"
+  alt="Bus Image "
+  width="1000px"
+  height="180px"
+/>
+<br />
+<br />
+
+<!-- Search bar -->
+<form method="GET" class="d-flex mb-3" id="searchForm">
+  <input
+    name="q"
+    class="form-control me-2"
+    placeholder="Search Places..."
+    value="{{ request.GET.q }}"
+    id="searchInput"
+  />
+  <button class="btn btn-outline-secondary" id="searchForm">Search</button>
+</form>
+
+<!-- Bus Table -->
+<table class="table table-bordered table-striped shadow-sm" id="busTable">
+  <thead class="table-light">
+    <tr>
+      <th>Routes</th>
+      <th>Price ($)</th>
+      <th>Duration</th>
+      <th>Person</th>
+      <th>Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for ticket in buss %}
+    <tr
+      class="{% if ticket.date < today %}table-danger{% elif ticket.person == 0 %}table-warning{% endif %}"
+    >
+      <td>{{ ticket.routes }}</td>
+      <td>{{ ticket.price }}</td>
+      <td>{{ ticket.durations }}</td>
+      <td>{{ ticket.person }}</td>
+      <td>{{ ticket.date }}</td>
+      <td>
+        <a
+          href="{% url 'tic-detail' ticket.id %}"
+          class="btn btn-success btn-sm"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          title="View Details"
+          >View</a
+        >
+        <a
+          href="{% url 'edit-bus' ticket.id %}"
+          class="btn btn-primary btn-sm"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          title="Edit Bus"
+          >Edit</a
+        >
+        <a
+          href="{% url 'delete-bus' ticket.id %}"
+          class="btn btn-danger btn-sm"
+          data-bs-toggle="tooltip"
+          data-bs-placement="top"
+          title="Delete Bus"
+          >Delete</a
+        >
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="5" class="text-center">No bus are available.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<br />
+<br />
+<div class="book">
+  <h1>Chennai Bus Ticket Booking</h1>
+  <p class="para">
+    Bus Booking from Chennai is easy and hassle-free on redBus, the world’s
+    leading online bus ticket booking platform. Over 1591 buses from 514
+    operators are available to and from Chennai on redBus. Both private and
+    RTC/government bus operators are available to choose from. You can select
+    your desired bus to top destinations, such as Bangalore, Coimbatore,
+    Madurai, Tiruchirapalli, Salem, Tirunelveli, Nagercoil, Hosur, Hyderabad,
+    Thoothukudi <br />
+    <br />
+    The first bus from Chennai departs at 00:10:00 while the last bus departs at
+    23:59:00. With an easy-to-use interface, all you have to do is follow these
+    steps and book your preferred bus tickets online.
+  </p>
+</div>
+{% endblock %}
